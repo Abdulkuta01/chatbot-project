@@ -65,7 +65,7 @@ def chatbot_response(msg):
         return "AI not configured."
 
     try:
-        url = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key={api_key}"
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent"
 
         headers = {
             "Content-Type": "application/json"
