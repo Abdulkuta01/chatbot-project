@@ -54,55 +54,46 @@ def is_safe_input(text):
     return not re.search(r"(DROP|DELETE|INSERT|SELECT|UPDATE)", text, re.I)
 
 # ---------------- AI-LIKE CHATBOT ----------------
+import os
+import requests
+
 def chatbot_response(msg):
 
     api_key = os.environ.get("AI_API_KEY")
 
     if not api_key:
-        return "AI is not configured yet."
+        return "AI not configured."
 
     try:
-        response = requests.post(
-            "https://api.openai.com/v1/chat/completions",
-            headers={
-                "Authorization": f"Bearer {api_key}",
-                "Content-Type": "application/json"
-            },
-            json={
-                "model": "gpt-4o-mini",
-                "messages": [
-                    {"role": "system", "content": "You are a helpful university assistant."},
-                    {"role": "user", "content": msg}
-                ],
-                "max_tokens": 200
-            }
-        )
+        url = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key={api_key}"
 
-        if response.status_code == 401:
-            return "Invalid API key. Please check your configuration."
+        headers = {
+            "Content-Type": "application/json"
+        }
 
-        if response.status_code == 429:
-            return "AI service limit reached. Please try again later."
+        data = {
+            "contents": [
+                {
+                    "parts": [
+                        {"text": f"You are a helpful university assistant.\nUser: {msg}"}
+                    ]
+                }
+            ]
+        }
 
+        response = requests.post(url, headers=headers, json=data)
+
+        # 🔍 SHOW REAL ERROR (VERY IMPORTANT)
         if response.status_code != 200:
-            return "AI is currently unavailable."
+            return f"Gemini error: {response.text}"
 
-        data = response.json()
-        return data["choices"][0]["message"]["content"]
+        result = response.json()
 
-    except Exception:
-        return "Error connecting to AI service."
-
-        # IMPORTANT: check if request failed
-        if response.status_code != 200:
-            return f"AI request failed: {response.text}"
-
-        data = response.json()
-
-        return data["choices"][0]["message"]["content"]
+        return result["candidates"][0]["content"]["parts"][0]["text"]
 
     except Exception as e:
-        return f"Error connecting to AI service: {str(e)}"
+        return f"Connection error: {str(e)}"
+       
 
 # ---------------- REGISTER ----------------
 @app.route("/register", methods=["GET", "POST"])
