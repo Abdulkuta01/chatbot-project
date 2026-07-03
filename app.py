@@ -54,15 +54,12 @@ def is_safe_input(text):
     return not re.search(r"(DROP|DELETE|INSERT|SELECT|UPDATE)", text, re.I)
 
 # ---------------- AI-LIKE CHATBOT ----------------
-import os
-import requests
-
 def chatbot_response(msg):
 
     api_key = os.environ.get("AI_API_KEY")
 
     if not api_key:
-        return "AI service not configured."
+        return "AI is not configured yet."
 
     try:
         response = requests.post(
@@ -74,18 +71,27 @@ def chatbot_response(msg):
             json={
                 "model": "gpt-4o-mini",
                 "messages": [
-                    {
-                        "role": "system",
-                        "content": "You are a helpful university assistant that explains academic concepts clearly with examples."
-                    },
-                    {
-                        "role": "user",
-                        "content": msg
-                    }
+                    {"role": "system", "content": "You are a helpful university assistant."},
+                    {"role": "user", "content": msg}
                 ],
                 "max_tokens": 200
             }
         )
+
+        if response.status_code == 401:
+            return "Invalid API key. Please check your configuration."
+
+        if response.status_code == 429:
+            return "AI service limit reached. Please try again later."
+
+        if response.status_code != 200:
+            return "AI is currently unavailable."
+
+        data = response.json()
+        return data["choices"][0]["message"]["content"]
+
+    except Exception:
+        return "Error connecting to AI service."
 
         # IMPORTANT: check if request failed
         if response.status_code != 200:
