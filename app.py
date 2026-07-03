@@ -2,14 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 import re
 from datetime import datetime
-
+import os
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
 from flask_bcrypt import Bcrypt
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
 app = Flask(__name__)
-app.secret_key = "secret123"
+app.secret_key = os.environ.get("SECRET_KEY", "fallbacksecret")
 
 bcrypt = Bcrypt(app)
 limiter = Limiter(get_remote_address, app=app)
