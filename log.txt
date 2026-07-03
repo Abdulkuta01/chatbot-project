@@ -1,0 +1,168 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:43:15] "GET / HTTP/1.1" 200 -
+INFO:root:User input: admission
+INFO:root:Bot reply: Admission is ongoing. Please visit the school portal.
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:43:22] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:43:26] "GET / HTTP/1.1" 200 -
+INFO:root:User input: delete
+INFO:root:Blocked malicious input!
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:43:46] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:43:50] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:55:43] "[31m[1mGET / HTTP/1.1[0m" 401 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:57:51] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:58:39] "POST /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:58:47] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:59:25] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:59:32] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:59:32] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:59:37] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:59:41] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:59:46] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 19:59:55] "GET / HTTP/1.1" 200 -
+INFO:flask-limiter:ratelimit 5 per 1 minute (127.0.0.1) exceeded at endpoint: chat
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:00:14] "[31m[1mPOST / HTTP/1.1[0m" 429 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\WINDOW 10 PRO\\Desktop\\chatbot_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug: * Detected change in 'C:\\Users\\WINDOW 10 PRO\\Desktop\\chatbot_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:27:00] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:27:00] "[33mGET /static/style.css HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:27:10] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:27:11] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:27:20] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:27:20] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:27:20] "[33mGET /static/style.css HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:27:32] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:27:32] "[33mGET /static/style.css HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:28:45] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:28:45] "[33mGET /static/style.css HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:28:49] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:28:49] "[33mGET /static/style.css HTTP/1.1[0m" 404 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\WINDOW 10 PRO\\Desktop\\chatbot_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in 'C:\\Users\\WINDOW 10 PRO\\Desktop\\chatbot_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug: * Detected change in 'C:\\Users\\WINDOW 10 PRO\\Desktop\\chatbot_project\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\WINDOW 10 PRO\\Desktop\\chatbot_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:51:51] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:51:52] "GET /static/style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:52:02] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:52:54] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:52:54] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:52:59] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:53:00] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:53:02] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:53:03] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:53:04] "GET /login?__debugger__=yes&cmd=resource&f=console.png&s=qFflO0FoxSzGASS1e14y HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:53:04] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:53:28] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:53:28] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:54:38] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:54:38] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:54:50] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:54:50] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 20:54:53] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 21:29:16] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 21:29:16] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 21:29:55] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 21:29:55] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 21:30:01] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 21:30:01] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 21:30:11] "POST / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 21:30:11] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\WINDOW 10 PRO\\Desktop\\chatbot_project\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\WINDOW 10 PRO\\Desktop\\chatbot_project\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\WINDOW 10 PRO\\Desktop\\chatbot_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:56:29] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:56:34] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:56:34] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:56:34] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:56:34] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=LgQ65lz7CZCH4i2S6Slh HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:56:34] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:56:58] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:57:08] "POST /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:58:01] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:58:02] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:58:02] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:58:02] "GET /login?__debugger__=yes&cmd=resource&f=console.png&s=LgQ65lz7CZCH4i2S6Slh HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:58:37] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:58:37] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:58:37] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:58:37] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png&s=LgQ65lz7CZCH4i2S6Slh HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:59:11] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:59:11] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:59:11] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 22:59:11] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png&s=LgQ65lz7CZCH4i2S6Slh HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\WINDOW 10 PRO\\Desktop\\chatbot_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug: * Detected change in 'C:\\Users\\WINDOW 10 PRO\\Desktop\\chatbot_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug: * Detected change in 'C:\\Users\\WINDOW 10 PRO\\Desktop\\chatbot_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 143-352-366
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 23:02:43] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 23:02:52] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 23:02:52] "[35m[1mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 23:02:52] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 23:02:52] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 23:02:52] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=Hf01QzUDLkPwqwFIgjq0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [02/Jul/2026 23:03:12] "POST /register HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\WINDOW 10 PRO\\Desktop\\chatbot_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat

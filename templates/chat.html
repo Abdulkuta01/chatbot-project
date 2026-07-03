@@ -1,0 +1,31 @@
+<!-- ================= chat.html ================= -->
+
+{% extends "base.html" %}
+{% block content %}
+
+<div class="chat-container">
+
+<div class="chat-box">
+    {% for sender, message, time in chats %}
+        {% if sender == "user" %}
+            <div class="user">
+                {{ message }}
+                <small>{{ time }}</small>
+            </div>
+        {% else %}
+            <div class="bot">
+                {{ message }}
+                <small>{{ time }}</small>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<form method="post" class="input-box">
+    <input name="message" placeholder="Type a message..." required>
+    <button>Send</button>
+</form>
+
+</div>
+
+{% endblock %}

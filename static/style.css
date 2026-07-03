@@ -1,0 +1,111 @@
+body {
+font-family: Arial;
+background: #ece5dd;
+margin: 0;
+}
+
+/* Navbar */
+.navbar {
+background: #075e54;
+color: white;
+padding: 15px;
+display: flex;
+justify-content: space-between;
+}
+
+.navbar a {
+color: white;
+margin-left: 15px;
+text-decoration: none;
+}
+
+/* Forms */
+.form-container {
+width: 300px;
+margin: 60px auto;
+background: white;
+padding: 20px;
+text-align: center;
+border-radius: 10px;
+}
+
+.form-container input {
+width: 90%;
+padding: 10px;
+margin: 10px;
+}
+
+.form-container button {
+padding: 10px 20px;
+background: #25d366;
+border: none;
+color: white;
+}
+
+/* Chat UI */
+.chat-container {
+width: 400px;
+margin: 20px auto;
+}
+
+.chat-box {
+height: 400px;
+background: white;
+overflow-y: scroll;
+padding: 10px;
+display: flex;
+flex-direction: column;
+border-radius: 10px;
+}
+
+.user {
+background: #dcf8c6;
+padding: 10px;
+margin: 5px;
+align-self: flex-end;
+border-radius: 10px;
+max-width: 70%;
+}
+
+.bot {
+background: #fff;
+padding: 10px;
+margin: 5px;
+align-self: flex-start;
+border-radius: 10px;
+max-width: 70%;
+}
+
+small {
+font-size: 10px;
+color: gray;
+display: block;
+}
+
+/* Input */
+.input-box {
+display: flex;
+margin-top: 10px;
+}
+
+.input-box input {
+flex: 1;
+padding: 10px;
+}
+
+.input-box button {
+background: #25d366;
+border: none;
+padding: 10px;
+color: white;
+}
+
+/* Dashboard */
+.dashboard {
+width: 400px;
+margin: 50px auto;
+background: white;
+padding: 20px;
+text-align: center;
+border-radius: 10px;
+}
