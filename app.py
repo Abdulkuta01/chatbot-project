@@ -76,7 +76,7 @@ def chatbot_response(msg):
                 "messages": [
                     {
                         "role": "system",
-                        "content": "You are a helpful university assistant that explains academic concepts simply."
+                        "content": "You are a helpful university assistant that explains academic concepts clearly with examples."
                     },
                     {
                         "role": "user",
@@ -87,12 +87,16 @@ def chatbot_response(msg):
             }
         )
 
+        # IMPORTANT: check if request failed
+        if response.status_code != 200:
+            return f"AI request failed: {response.text}"
+
         data = response.json()
 
         return data["choices"][0]["message"]["content"]
 
-    except Exception:
-        return "Error connecting to AI service."
+    except Exception as e:
+        return f"Error connecting to AI service: {str(e)}"
 
 # ---------------- REGISTER ----------------
 @app.route("/register", methods=["GET", "POST"])
