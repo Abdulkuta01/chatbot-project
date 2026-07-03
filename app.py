@@ -91,8 +91,8 @@ def chatbot_response(msg):
 
         return result["candidates"][0]["content"]["parts"][0]["text"]
 
-    except Exception as e:
-        return f"Connection error: {str(e)}"
+   except Exception as e:
+    return f"Connection error: {str(e)}"
        
 
 # ---------------- REGISTER ----------------
