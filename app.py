@@ -53,71 +53,24 @@ def load_user(user_id):
 def is_safe_input(text):
     return not re.search(r"(DROP|DELETE|INSERT|SELECT|UPDATE)", text, re.I)
 
-# ---------------- AI-LIKE CHATBOT ----------------
-# ---------------- AI CHATBOT ----------------
-import requests
-
+# ---------------- CHATBOT (STABLE VERSION) ----------------
 def chatbot_response(msg):
-    api_key = os.environ.get("AI_API_KEY")
+    msg = msg.lower()
 
-    if not api_key:
-        return "AI not configured."
+    if "cgpa" in msg:
+        return "CGPA (Cumulative Grade Point Average) is the average of your grade points across all semesters."
 
-    try:
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+    elif "admission" in msg:
+        return "Admission details depend on your department. Please check the school portal or ask for specific requirements."
 
-        data = {
-            "contents": [
-                {
-                    "parts": [
-                        {"text": msg}
-                    ]
-                }
-            ]
-        }
+    elif "fees" in msg:
+        return "School fees vary by department and level. Visit the bursary section or official portal for accurate details."
 
-        response = requests.post(url, json=data)
+    elif "exam" in msg:
+        return "Exams are conducted at the end of each semester. Make sure you complete registration and clearance."
 
-        if response.status_code != 200:
-            return f"Gemini error: {response.text}"
-
-        result = response.json()
-
-        return result["candidates"][0]["content"]["parts"][0]["text"]
-
-    except Exception as e:
-        return f"Connection error: {str(e)}"
-
-
-# ---------------- REGISTER ----------------
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    if request.method == "POST":
-        username = request.form["username"]
-        password = bcrypt.generate_password_hash(request.form["password"]).decode()
-
-        conn = sqlite3.connect("database.db")
-        c = conn.cursor()
-
-        try:
-            c.execute("INSERT INTO users(username, password) VALUES (?, ?)", (username, password))
-            conn.commit()
-        except:
-            return "User already exists"
-
-        return redirect(url_for("login"))
-
-    return render_template("register.html")
-        # IMPORTANT: check if request failed
-        if response.status_code != 200:
-            return f"AI request failed: {response.text}"
-
-        data = response.json()
-
-        return data["choices"][0]["message"]["content"]
-
-    except Exception as e:
-        return f"Error connecting to AI service: {str(e)}"
+    else:
+        return "I'm here to help with admission, fees, CGPA, exams, and results. Please ask clearly."
 
 # ---------------- REGISTER ----------------
 @app.route("/register", methods=["GET", "POST"])
