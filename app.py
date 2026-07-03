@@ -54,34 +54,32 @@ def is_safe_input(text):
     return not re.search(r"(DROP|DELETE|INSERT|SELECT|UPDATE)", text, re.I)
 
 # ---------------- AI-LIKE CHATBOT ----------------
-import requests
 
-def chatbot_response(msg):
+    
+# ---------------- REGISTER ----------------
+@app.def chatbot_response(msg):
+    import os
+    import requests
+
     api_key = os.environ.get("AI_API_KEY")
 
     if not api_key:
         return "AI not configured."
 
     try:
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={api_key}"
-
-        headers = {
-            "Content-Type": "application/json"
-        }
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
 
         data = {
             "contents": [
                 {
                     "parts": [
-                        {
-                            "text": f"You are a helpful university assistant. Explain clearly.\nUser: {msg}"
-                        }
+                        {"text": msg}
                     ]
                 }
             ]
         }
 
-        response = requests.post(url, headers=headers, json=data)
+        response = requests.post(url, json=data)
 
         if response.status_code != 200:
             return f"Gemini error: {response.text}"
@@ -91,10 +89,7 @@ def chatbot_response(msg):
         return result["candidates"][0]["content"]["parts"][0]["text"]
 
     except Exception as e:
-        return f"Connection error: {str(e)}"
-    
-# ---------------- REGISTER ----------------
-@app.route("/register", methods=["GET", "POST"])
+        return f"Connection error: {str(e)}"("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
         username = request.form["username"]
