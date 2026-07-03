@@ -57,20 +57,77 @@ def is_safe_input(text):
 def chatbot_response(msg):
     msg = msg.lower()
 
-    if "cgpa" in msg:
-        return "CGPA (Cumulative Grade Point Average) is the average of your grade points across all semesters."
+    faq = {
 
-    elif "admission" in msg:
-        return "Admission details depend on your department. Please check the school portal or ask for specific requirements."
+        # ---------------- ACADEMICS ----------------
+        "what is cgpa": "CGPA (Cumulative Grade Point Average) is the average of a student's academic performance across all semesters.",
+        "what is gpa": "GPA is Grade Point Average for a single semester.",
+        "how is cgpa calculated": "CGPA is calculated by dividing total grade points by total credit units.",
+        "what is credit unit": "A credit unit represents the weight of a course in academic workload.",
+        "what is course registration": "Course registration is the process of selecting and enrolling in courses for a semester.",
+        "what is transcript": "A transcript is an official record of a student's academic performance.",
 
-    elif "fees" in msg:
-        return "School fees vary by department and level. Visit the bursary section or official portal for accurate details."
+        # ---------------- ADMISSION ----------------
+        "how do i get admission": "Admission requires meeting the school's cut-off mark and passing the screening process.",
+        "what is cut off mark": "Cut-off mark is the minimum score required for admission into a course.",
+        "can i change course after admission": "Yes, but it depends on availability and school approval.",
+        "what is jamb": "JAMB is the exam body responsible for university admissions in Nigeria.",
+        "what is post utme": "Post UTME is a screening exam conducted by universities after JAMB.",
 
-    elif "exam" in msg:
-        return "Exams are conducted at the end of each semester. Make sure you complete registration and clearance."
+        # ---------------- FEES ----------------
+        "how much is school fees": "School fees vary by department and level. Check the official portal for details.",
+        "what is acceptance fee": "Acceptance fee is a compulsory payment to confirm admission.",
+        "can i pay fees in installment": "Some schools allow installment payments depending on policy.",
+        "what happens if i dont pay fees": "You may be denied access to exams and registration.",
+        "where do i pay fees": "Fees are usually paid through the school portal or designated banks.",
 
-    else:
-        return "I'm here to help with admission, fees, CGPA, exams, and results. Please ask clearly."
+        # ---------------- EXAMS ----------------
+        "when is exam": "Exams are usually held at the end of each semester.",
+        "what is exam slip": "An exam slip is a document that allows you to enter examination halls.",
+        "what happens if i miss exam": "Missing an exam may lead to carryover or absence grading.",
+        "what is carryover": "Carryover means retaking a failed course.",
+        "how do i prepare for exam": "Study early, attend lectures, and review past questions.",
+
+        # ---------------- RESULTS ----------------
+        "how do i check result": "Results are checked through the student portal.",
+        "why is my result withheld": "It may be due to unpaid fees or missing requirements.",
+        "what is pass mark": "Pass mark is usually 40% or 45% depending on the institution.",
+        "what is academic standing": "It shows your performance status (good, probation, etc).",
+        "can result change": "Yes, after review or remarking.",
+
+        # ---------------- STUDENT LIFE ----------------
+        "what is hostel": "A hostel is student accommodation provided by the school.",
+        "how do i get hostel": "Hostels are allocated based on availability and payment.",
+        "what is siwes": "SIWES is industrial training for students to gain practical experience.",
+        "what is clearance": "Clearance confirms that a student has no pending issues before graduation.",
+        "what is matriculation": "Matriculation is the formal admission ceremony for new students.",
+
+        # ---------------- GENERAL SUPPORT ----------------
+        "hello": "Hello! I am your university assistant. How can I help you today?",
+        "hi": "Hi there! Ask me anything about school.",
+        "who are you": "I am a student support chatbot designed to help with academic questions.",
+        "thank you": "You're welcome!",
+        "bye": "Goodbye! Wish you success in your studies.",
+
+        # ---------------- SYSTEM ----------------
+        "what is login": "Login is the process of accessing your student account.",
+        "what is register": "Register is creating a new account in the system.",
+        "what is dashboard": "Dashboard is the main page showing your student information.",
+        "what is admin": "Admin is the system controller who manages users and data.",
+        "what is session": "Session is temporary login data stored while using the system.",
+
+        # ---------------- EXTRA ACADEMIC ----------------
+        "what is syllabus": "A syllabus is the outline of topics covered in a course.",
+        "what is lecture": "A lecture is a formal teaching session in class.",
+        "what is assignment": "An assignment is a task given to students for assessment.",
+        "what is seminar": "A seminar is a group discussion or presentation session.",
+        "what is project work": "Project work is a practical academic task based on research.",
+
+        # ---------------- FINAL ----------------
+        "default": "I'm here to help with CGPA, admission, fees, exams, results, and student life."
+    }
+
+    return faq.get(msg, faq["default"])
 
 # ---------------- REGISTER ----------------
 @app.route("/register", methods=["GET", "POST"])
