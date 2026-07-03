@@ -54,36 +54,45 @@ def is_safe_input(text):
     return not re.search(r"(DROP|DELETE|INSERT|SELECT|UPDATE)", text, re.I)
 
 # ---------------- AI-LIKE CHATBOT ----------------
+import os
+import requests
+
 def chatbot_response(msg):
-    msg = msg.lower()
 
-    # intent patterns (more flexible)
-    patterns = {
-        "admission": ["admission", "apply", "entry"],
-        "fees": ["fees", "school fees", "payment"],
-        "course": ["course", "registration", "register"],
-        "exam": ["exam", "test"],
-        "result": ["result", "grade"],
-        "hostel": ["hostel", "accommodation"],
-        "deadline": ["deadline", "closing date"]
-    }
+    api_key = os.environ.get("AI_API_KEY")
 
-    responses = {
-        "admission": "Admission is ongoing. Visit the school portal for application.",
-        "fees": "School fees depend on your department. Check the portal for details.",
-        "course": "Course registration is currently open via the student portal.",
-        "exam": "Examinations will commence next month. Prepare accordingly.",
-        "result": "Results are released on the school portal.",
-        "hostel": "Hostel allocation will begin soon.",
-        "deadline": "Deadlines are announced on the official portal."
-    }
+    if not api_key:
+        return "AI service not configured."
 
-    for intent, keywords in patterns.items():
-        for word in keywords:
-            if word in msg:
-                return responses[intent]
+    try:
+        response = requests.post(
+            "https://api.openai.com/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json"
+            },
+            json={
+                "model": "gpt-4o-mini",
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": "You are a helpful university assistant that explains academic concepts simply."
+                    },
+                    {
+                        "role": "user",
+                        "content": msg
+                    }
+                ],
+                "max_tokens": 200
+            }
+        )
 
-    return "I'm here to help with admission, fees, exams, results, and more. Please ask clearly."
+        data = response.json()
+
+        return data["choices"][0]["message"]["content"]
+
+    except Exception:
+        return "Error connecting to AI service."
 
 # ---------------- REGISTER ----------------
 @app.route("/register", methods=["GET", "POST"])
