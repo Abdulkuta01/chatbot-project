@@ -55,117 +55,90 @@ def is_safe_input(text):
 
 # ---------------- CHATBOT (STABLE VERSION) ----------------
 import random
+from flask import session
 
 def chatbot_response(msg):
     msg = msg.lower()
 
-    greetings = ["hello", "hi", "hey", "good morning", "good afternoon", "good evening"]
-    greet_reply = ["Hello! 👋", "Hi there! 😊", "Hey! 👋", "Welcome! 🎓", "Good to see you!"]
+    greetings = ["hello", "hi", "hey"]
+    greet_reply = ["Hello! 👋", "Hi there! 😊", "Hey! 👋"]
+data = {
 
-    data = {
+"cgpa": ["CGPA is your overall academic average.", "It measures total performance.", "It combines all semesters.", "It reflects academic consistency.", "Higher CGPA means better results."],
+"gpa": ["GPA is per semester performance.", "It measures one term.", "It contributes to CGPA.", "It resets each semester.", "It tracks short-term results."],
+"admission": ["Admission requires requirements.", "You need JAMB score.", "Screening is needed.", "Depends on course.", "Documents must be complete."],
+"cutoff": ["Cut-off is minimum score.", "Varies by course.", "Higher is safer.", "Changes yearly.", "Important for entry."],
+"jamb": ["JAMB is entrance exam.", "Required for admission.", "Score matters.", "First step.", "Used for screening."],
+"postutme": ["Post-UTME is screening.", "After JAMB.", "Affects admission.", "Some schools skip.", "Prepare well."],
+"fees": ["Fees vary by course.", "Check portal.", "Pay early.", "Late penalty.", "Confirm payment."],
+"acceptance": ["Confirms admission.", "Paid once.", "Non-refundable.", "Very important.", "Secures slot."],
+"exam": ["End of semester test.", "Requires registration.", "Schedule released.", "Missing is risky.", "Prepare well."],
+"carryover": ["Failed course repeat.", "Retake required.", "Delays progress.", "Avoid it.", "Common issue."],
+"result": ["Check via portal.", "Shows grades.", "May delay.", "Needs payment.", "Updated online."],
+"transcript": ["Academic record.", "Used for jobs.", "Official doc.", "Request from school.", "Contains results."],
+"registration": ["Done each semester.", "Select courses.", "Compulsory.", "Late penalty.", "Needs approval."],
+"hostel": ["Student housing.", "Limited space.", "Apply early.", "On campus.", "Requires payment."],
+"siwes": ["Industrial training.", "Gives experience.", "Attach to firm.", "Submit report.", "Important program."],
+"clearance": ["Confirms no debt.", "Needed to graduate.", "Multiple units.", "Avoid delay.", "Start early."],
+"matriculation": ["Admission ceremony.", "Welcomes students.", "Official entry.", "Take oath.", "Important event."],
+"graduation": ["Program completion.", "Get certificate.", "Requires clearance.", "Celebration.", "Final stage."],
+"lecture": ["Teaching session.", "By lecturers.", "Attend always.", "Take notes.", "Important learning."],
+"assignment": ["Given tasks.", "Graded work.", "Submit early.", "Improves learning.", "Can be group."],
+"project": ["Final year work.", "Research-based.", "Supervisor guides.", "Defense needed.", "Tests knowledge."],
+"portal": ["Student system.", "Check results.", "Register courses.", "Secure login.", "Very important."],
+"login": ["Access account.", "Use credentials.", "Keep safe.", "Required always.", "Private entry."],
+"password": ["Protects account.", "Keep secret.", "Use strong one.", "Change often.", "Do not share."],
+"department": ["Handles courses.", "Student belongs here.", "Guides academics.", "Manages subjects.", "Important unit."],
+"faculty": ["Group of departments.", "Led by dean.", "Oversees study.", "Academic body.", "Manages programs."],
+"library": ["Study center.", "Books available.", "Quiet space.", "Supports research.", "Digital access."],
+"semester": ["Study period.", "2 per year.", "Contains courses.", "Ends with exams.", "Important timeline."],
+"session": ["Full academic year.", "Contains semesters.", "Starts admission.", "Ends yearly.", "Academic cycle."],
+"defer": ["Postpone admission.", "Needs approval.", "Valid reason.", "Temporary break.", "Resume later."],
+"withdraw": ["Leave program.", "Formal exit.", "Can reapply.", "Serious step.", "Requires process."],
+"idcard": ["Student ID.", "Proof of identity.", "Needed on campus.", "Issued by school.", "Carry always."],
+"timetable": ["Lecture schedule.", "Shows time.", "Helps planning.", "Updated often.", "Check regularly."],
+"venue": ["Lecture location.", "Exam hall.", "In timetable.", "Avoid confusion.", "Know your class."],
+"attendance": ["Presence in class.", "Important for marks.", "Tracked often.", "Required sometimes.", "Boost learning."],
+"probation": ["Low CGPA warning.", "Improve quickly.", "Risk removal.", "Temporary status.", "Needs effort."],
+"expulsion": ["Permanent removal.", "Due to misconduct.", "Serious case.", "Strict rule.", "Avoid issues."],
+"dresscode": ["School dressing.", "Follow rules.", "Applies in exams.", "Avoid punishment.", "Maintain discipline."],
+"deadline": ["Submission date.", "Must meet it.", "Late penalty.", "Important timing.", "Plan ahead."],
+"groupwork": ["Team assignment.", "Shared tasks.", "Work together.", "Improves teamwork.", "Common task."],
+"presentation": ["Oral explanation.", "Use slides.", "Speak clearly.", "Part of grading.", "Confidence matters."],
+"defense": ["Project presentation.", "Panel review.", "Answer questions.", "Final step.", "Important stage."],
+"internship": ["Work experience.", "Like SIWES.", "Build skills.", "Real exposure.", "Career growth."],
+"certificate": ["Proof of study.", "Issued after grad.", "Official doc.", "Needed for jobs.", "Important record."],
+"alumni": ["Past students.", "Stay connected.", "Support network.", "Events held.", "Career help."],
+"bursary": ["Handles payments.", "School finance unit.", "Confirms fees.", "Important office.", "Payment issues."],
+"hod": ["Head of department.", "Leads department.", "Academic authority.", "Handles issues.", "Guides students."],
+"dean": ["Faculty head.", "Oversees departments.", "Academic leader.", "Manages faculty.", "Important role."],
+"examofficer": ["Manages exams.", "Handles schedules.", "Controls records.", "Important staff.", "Exam authority."],
+"ict": ["Tech department.", "Handles systems.", "Portal issues.", "Support services.", "Important unit."],
 
-        "cgpa": ["CGPA is your overall academic average.", "It reflects total performance.", "It is calculated across semesters.", "It shows academic consistency.", "Higher CGPA means better results."],
+"default": ["Ask about academics.", "I can help you.", "Try school topics.", "Rephrase please.", "I am here to assist."]
+}
 
-        "gpa": ["GPA is per semester performance.", "It measures one semester.", "It contributes to CGPA.", "It resets each semester.", "It tracks short-term performance."],
-
-        "admission": ["Admission requires meeting requirements.", "You need JAMB score.", "Screening is required.", "Depends on course demand.", "Documents must be complete."],
-
-        "cut off": ["Cut-off is minimum score.", "Each course differs.", "Higher is better.", "Changes yearly.", "Important for admission."],
-
-        "jamb": ["JAMB is entrance exam.", "Required for admission.", "Score determines eligibility.", "First step to university.", "Used for screening."],
-
-        "post utme": ["Post-UTME is screening.", "Comes after JAMB.", "Affects admission.", "Some schools skip it.", "Prepare well."],
-
-        "fees": ["Fees vary by course.", "Check portal.", "Must be paid early.", "Late payment penalty.", "Confirm payment."],
-
-        "acceptance": ["Confirms admission.", "Paid after offer.", "Non-refundable.", "Very important.", "Secure your spot."],
-
-        "exam": ["End of semester test.", "Must register courses.", "Schedule released early.", "Missing leads to fail.", "Prepare well."],
-
-        "carryover": ["Failed course repeat.", "Register again.", "Delays graduation.", "Avoid by studying.", "Common issue."],
-
-        "result": ["Check via portal.", "Shows performance.", "May delay sometimes.", "Requires fee payment.", "Updated online."],
-
-        "transcript": ["Academic record.", "Used for jobs/studies.", "Official document.", "Request from school.", "Contains results."],
-
-        "registration": ["Done each semester.", "Select courses.", "Compulsory.", "Late penalty.", "Needs approval."],
-
-        "hostel": ["Student accommodation.", "Limited spaces.", "Apply early.", "On campus.", "Requires payment."],
-
-        "siwes": ["Industrial training.", "Gives experience.", "Required in some courses.", "Attach to company.", "Submit report."],
-
-        "clearance": ["Confirms no issues.", "Required before graduation.", "Done across units.", "Avoid delay.", "Start early."],
-
-        "matriculation": ["Admission ceremony.", "Welcomes students.", "Official entry.", "Take oath.", "Important event."],
-
-        "graduation": ["End of program.", "Receive certificate.", "Requires clearance.", "Celebration event.", "Marks success."],
-
-        "lecture": ["Teaching session.", "By lecturers.", "Important to attend.", "Provides notes.", "May be online."],
-
-        "assignment": ["Given tasks.", "Part of grading.", "Submit early.", "Improves learning.", "Can be group work."],
-
-        "project": ["Final year work.", "Research-based.", "Supervisor assigned.", "Defense required.", "Tests knowledge."],
-
-        "portal": ["Student system.", "Check results.", "Register courses.", "Secure login.", "Important tool."],
-
-        "login": ["Access account.", "Use credentials.", "Keep safe.", "Required always.", "Private access."],
-
-        "password": ["Protects account.", "Keep secret.", "Use strong one.", "Change regularly.", "Do not share."],
-
-        "department": ["Handles courses.", "Student belongs here.", "Manages academics.", "Guides students.", "Important unit."],
-
-        "faculty": ["Group of departments.", "Led by dean.", "Oversees programs.", "Academic structure.", "Manages departments."],
-
-        "library": ["Study center.", "Books available.", "Quiet space.", "Supports research.", "Digital access too."],
-
-        "semester": ["Academic period.", "Usually 2 per year.", "Contains courses.", "Ends with exams.", "Important timeline."],
-
-        "session": ["Academic year.", "Includes semesters.", "Starts admission.", "Ends with results.", "Full academic cycle."],
-
-        "defer": ["Postpone admission.", "Requires approval.", "Valid reason needed.", "Temporary delay.", "Resume later."],
-
-        "withdraw": ["Leave program.", "Can reapply later.", "Requires process.", "Formal exit.", "Important decision."],
-
-        "id card": ["Student identity.", "Used for access.", "Must carry it.", "Issued by school.", "Very important."],
-
-        "timetable": ["Schedule of lectures.", "Shows time/venue.", "Helps planning.", "Updated regularly.", "Check often."],
-
-        "venue": ["Place of lecture.", "Exam location.", "Specified in timetable.", "Important to know.", "Avoid confusion."],
-
-        "attendance": ["Presence in class.", "Important for grading.", "Required sometimes.", "Tracked by lecturers.", "Improves learning."],
-
-        "probation": ["Low performance warning.", "Improve CGPA.", "Risk of withdrawal.", "Temporary status.", "Needs attention."],
-
-        "expulsion": ["Permanent removal.", "Due to misconduct.", "Serious consequence.", "Strict rule.", "Avoid violations."],
-
-        "dress code": ["School dressing rule.", "Must follow guidelines.", "Applies to exams.", "Maintains discipline.", "Avoid sanctions."],
-
-        "deadline": ["Submission date.", "Must meet it.", "Late penalty.", "Important for tasks.", "Plan ahead."],
-
-        "group work": ["Team assignment.", "Collaboration needed.", "Shared tasks.", "Improves teamwork.", "Common in school."],
-
-        "presentation": ["Oral explanation.", "Part of grading.", "Prepare slides.", "Speak clearly.", "Confidence needed."],
-
-        "defense": ["Project presentation.", "Panel evaluation.", "Final assessment.", "Answer questions.", "Important stage."],
-
-        "internship": ["Work experience.", "Similar to SIWES.", "Build skills.", "Real-world exposure.", "Career growth."],
-
-        "certificate": ["Proof of study.", "Issued after graduation.", "Important document.", "Used for jobs.", "Official record."],
-
-        "alumni": ["Past students.", "Remain connected.", "Support network.", "Events organized.", "Career help."],
-
-        "default": ["I can help with academic questions.", "Ask about school topics.", "Try CGPA, admission, etc.", "I’m here to assist.", "Please rephrase."]
-    }
-
+    # 🔹 Detect greeting
     is_greet = any(g in msg for g in greetings)
 
+    # 🔹 Check for direct keyword match
     for key in data:
         if key in msg:
-            response = random.choice(data[key])
-            return f"{random.choice(greet_reply)} {response}" if is_greet else response
+            session["last_topic"] = key  # 🔥 SAVE MEMORY
+            reply = random.choice(data[key])
+            return f"{random.choice(greet_reply)} {reply}" if is_greet else reply
 
-    return f"{random.choice(greet_reply)} How can I assist you?" if is_greet else random.choice(data["default"])
+    # 🔹 Handle follow-up questions (memory use)
+    last_topic = session.get("last_topic")
 
+    follow_words = ["it", "that", "this", "explain more", "how", "why"]
+
+    if last_topic and any(word in msg for word in follow_words):
+        reply = random.choice(data.get(last_topic, data["default"]))
+        return f"Continuing on {last_topic.upper()}: {reply}"
+
+    # 🔹 Default
+    return random.choice(data["default"])
 # ---------------- REGISTER ----------------
 @app.route("/register", methods=["GET", "POST"])
 def register():
