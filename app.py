@@ -55,14 +55,16 @@ def is_safe_input(text):
 
 # ---------------- CHATBOT (STABLE VERSION) ----------------
 import random
-from flask import session
 
 def chatbot_response(msg):
     msg = msg.lower()
 
-    greetings = ["hello", "hi", "hey"]
-    greet_reply = ["Hello! 👋", "Hi there! 😊", "Hey! 👋"]
-data = {
+    greetings = ["hello", "hi", "hey", "good morning", "good afternoon", "good evening"]
+    greet_reply = ["Hello! 👋", "Hi there! 😊", "Hey! 👋", "Welcome! 🎓", "Good to see you!"]
+
+    
+        # your 50 intents here
+    data = {
 
 "cgpa": ["CGPA is your overall academic average.", "It measures total performance.", "It combines all semesters.", "It reflects academic consistency.", "Higher CGPA means better results."],
 "gpa": ["GPA is per semester performance.", "It measures one term.", "It contributes to CGPA.", "It resets each semester.", "It tracks short-term results."],
@@ -118,27 +120,15 @@ data = {
 "default": ["Ask about academics.", "I can help you.", "Try school topics.", "Rephrase please.", "I am here to assist."]
 }
 
-    # 🔹 Detect greeting
+
     is_greet = any(g in msg for g in greetings)
 
-    # 🔹 Check for direct keyword match
     for key in data:
         if key in msg:
-            session["last_topic"] = key  # 🔥 SAVE MEMORY
-            reply = random.choice(data[key])
-            return f"{random.choice(greet_reply)} {reply}" if is_greet else reply
+            response = random.choice(data[key])
+            return f"{random.choice(greet_reply)} {response}" if is_greet else response
 
-    # 🔹 Handle follow-up questions (memory use)
-    last_topic = session.get("last_topic")
-
-    follow_words = ["it", "that", "this", "explain more", "how", "why"]
-
-    if last_topic and any(word in msg for word in follow_words):
-        reply = random.choice(data.get(last_topic, data["default"]))
-        return f"Continuing on {last_topic.upper()}: {reply}"
-
-    # 🔹 Default
-    return random.choice(data["default"])
+    return f"{random.choice(greet_reply)} How can I assist you?" if is_greet else random.choice(data["default"])
 # ---------------- REGISTER ----------------
 @app.route("/register", methods=["GET", "POST"])
 def register():
