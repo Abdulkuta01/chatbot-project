@@ -69,20 +69,28 @@ overflow-y: auto;
 
 /* MESSAGE STYLE */
 .message {
-margin: 10px 0;
-padding: 10px 15px;
-border-radius: 10px;
-max-width: 60%;
+    margin: 8px 0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    max-width: 60%;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    color: #000000; /* black text for all bubbles */
 }
 
+/* USER MESSAGE */
 .user {
-background: #d9fdd3;
-margin-left: auto;
+    background: #7aaa56;  /* light WhatsApp green */
+    margin-left: auto;
 }
 
+/* BOT MESSAGE */
 .bot {
-background: white;
-margin-right: auto;
+    background: #d3b4b4;  /* white bubble */
+    margin-right: auto;
+    border: 1px solid #e0e0e0;
 }
 
 /* INPUT AREA */
