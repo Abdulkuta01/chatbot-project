@@ -170,8 +170,17 @@ cursor: pointer;
 
 ```
 <div class="chat-header">
-    Student Assistant
+    <span>Student Assistant</span>
+
+```
+<div style="float: right;">
+    <a href="/admin" style="color:white; margin-right:15px;">Admin</a>
+    <a href="/logout" style="color:white;">Logout</a>
 </div>
+```
+
+</div>
+
 
 <div class="chat-box">
     {% for sender, message, time in chats %}
