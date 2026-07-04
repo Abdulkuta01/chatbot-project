@@ -12,10 +12,24 @@
     font-family: Arial, sans-serif;
 }
 
-/* FULL SCREEN */
+/* DESKTOP FIX */
 body {
-height: 100vh;
-display: flex;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0b141a;
+}
+
+/* MAIN APP WRAPPER */
+.app-container {
+    width: 95%;
+    max-width: 1200px;
+    height: 95vh;
+    display: flex;
+    background: #efeae2;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 /* LEFT SIDEBAR (WhatsApp style) */
@@ -42,7 +56,7 @@ background: #efeae2;
 .chat-header {
 background: #202c33;
 color: white;
-padding: 15px;
+padding: 25px;
 font-weight: bold;
 }
 
@@ -98,19 +112,33 @@ cursor: pointer;
 
 /* 📱 MOBILE RESPONSIVENESS */
 @media screen and (max-width: 768px) {
+body {
+        align-items: stretch;
+    }
 
-    body {
-        flex-direction: column;
+    .app-container {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
     }
 
     .sidebar {
-        display: none; /* hide sidebar on phone */
+        display: none;
     }
 
     .chat-container {
         width: 100%;
-        height: 100vh;
     }
+}
+
+    .sidebar {
+    width: 30%;
+    min-width: 250px;
+}
+
+.chat-container {
+    width: 100%;
+}
 
     .chat-header {
         text-align: center;
@@ -122,9 +150,9 @@ cursor: pointer;
     }
 
     .message {
-        max-width: 80%;
-        font-size: 14px;
-    }
+    max-width: 55%;
+    word-wrap: break-word;
+}
 
     .chat-input {
         padding: 8px;
@@ -139,7 +167,7 @@ cursor: pointer;
         padding: 8px 12px;
         font-size: 14px;
     }
-}
+
 
 .chat-box {
     scroll-behavior: smooth;
@@ -156,6 +184,9 @@ cursor: pointer;
 </script>
 
 <body>
+
+    <div class="app-container">
+    <!-- sidebar + chat-container go here -->
 
 <!-- SIDEBAR -->
 
@@ -196,6 +227,7 @@ cursor: pointer;
 </form>
 ```
 
+</div>
 </div>
 
 </body>
