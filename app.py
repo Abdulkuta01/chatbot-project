@@ -54,80 +54,251 @@ def is_safe_input(text):
     return not re.search(r"(DROP|DELETE|INSERT|SELECT|UPDATE)", text, re.I)
 
 # ---------------- CHATBOT (STABLE VERSION) ----------------
+import random
+
 def chatbot_response(msg):
     msg = msg.lower()
 
-    faq = {
+    data = {
 
-        # ---------------- ACADEMICS ----------------
-        "what is cgpa": "CGPA (Cumulative Grade Point Average) is the average of a student's academic performance across all semesters.",
-        "what is gpa": "GPA is Grade Point Average for a single semester.",
-        "how is cgpa calculated": "CGPA is calculated by dividing total grade points by total credit units.",
-        "what is credit unit": "A credit unit represents the weight of a course in academic workload.",
-        "what is course registration": "Course registration is the process of selecting and enrolling in courses for a semester.",
-        "what is transcript": "A transcript is an official record of a student's academic performance.",
+        "cgpa": [
+            "CGPA is the cumulative average of your grade points across all semesters.",
+            "It reflects your overall academic performance throughout your program.",
+            "CGPA is calculated by dividing total grade points by total credit units.",
+            "It helps measure long-term academic success.",
+            "A higher CGPA indicates better academic performance."
+        ],
 
-        # ---------------- ADMISSION ----------------
-        "how do i get admission": "Admission requires meeting the school's cut-off mark and passing the screening process.",
-        "what is cut off mark": "Cut-off mark is the minimum score required for admission into a course.",
-        "can i change course after admission": "Yes, but it depends on availability and school approval.",
-        "what is jamb": "JAMB is the exam body responsible for university admissions in Nigeria.",
-        "what is post utme": "Post UTME is a screening exam conducted by universities after JAMB.",
+        "gpa": [
+            "GPA is your grade point average for a single semester.",
+            "It shows your academic performance within a semester.",
+            "Each semester has its own GPA.",
+            "GPA contributes to your overall CGPA.",
+            "It helps track short-term performance."
+        ],
 
-        # ---------------- FEES ----------------
-        "how much is school fees": "School fees vary by department and level. Check the official portal for details.",
-        "what is acceptance fee": "Acceptance fee is a compulsory payment to confirm admission.",
-        "can i pay fees in installment": "Some schools allow installment payments depending on policy.",
-        "what happens if i dont pay fees": "You may be denied access to exams and registration.",
-        "where do i pay fees": "Fees are usually paid through the school portal or designated banks.",
+        "credit": [
+            "Credit unit represents the weight of a course.",
+            "Courses have different credit units based on importance.",
+            "Higher credit courses affect your CGPA more.",
+            "Credits determine workload and grading weight.",
+            "Each course contributes differently based on its credit."
+        ],
 
-        # ---------------- EXAMS ----------------
-        "when is exam": "Exams are usually held at the end of each semester.",
-        "what is exam slip": "An exam slip is a document that allows you to enter examination halls.",
-        "what happens if i miss exam": "Missing an exam may lead to carryover or absence grading.",
-        "what is carryover": "Carryover means retaking a failed course.",
-        "how do i prepare for exam": "Study early, attend lectures, and review past questions.",
+        "admission": [
+            "Admission requires meeting cut-off marks and passing screening.",
+            "You need a good JAMB score and proper documentation.",
+            "Admission depends on performance and course availability.",
+            "Screening results also affect admission chances.",
+            "Ensure all requirements are complete before applying."
+        ],
 
-        # ---------------- RESULTS ----------------
-        "how do i check result": "Results are checked through the student portal.",
-        "why is my result withheld": "It may be due to unpaid fees or missing requirements.",
-        "what is pass mark": "Pass mark is usually 40% or 45% depending on the institution.",
-        "what is academic standing": "It shows your performance status (good, probation, etc).",
-        "can result change": "Yes, after review or remarking.",
+        "cut off": [
+            "Cut-off mark is the minimum score required for admission.",
+            "Each department sets its own cut-off mark.",
+            "Higher scores increase your chances.",
+            "Cut-off marks may vary yearly.",
+            "Always aim above the minimum requirement."
+        ],
 
-        # ---------------- STUDENT LIFE ----------------
-        "what is hostel": "A hostel is student accommodation provided by the school.",
-        "how do i get hostel": "Hostels are allocated based on availability and payment.",
-        "what is siwes": "SIWES is industrial training for students to gain practical experience.",
-        "what is clearance": "Clearance confirms that a student has no pending issues before graduation.",
-        "what is matriculation": "Matriculation is the formal admission ceremony for new students.",
+        "jamb": [
+            "JAMB is required for university admission in Nigeria.",
+            "Your JAMB score determines eligibility.",
+            "It is the first step to gaining admission.",
+            "You must meet the required score.",
+            "JAMB result is used for screening."
+        ],
 
-        # ---------------- GENERAL SUPPORT ----------------
-        "hello": "Hello! I am your university assistant. How can I help you today?",
-        "hi": "Hi there! Ask me anything about school.",
-        "who are you": "I am a student support chatbot designed to help with academic questions.",
-        "thank you": "You're welcome!",
-        "bye": "Goodbye! Wish you success in your studies.",
+        "post utme": [
+            "Post-UTME is conducted after JAMB.",
+            "It helps schools screen candidates.",
+            "Performance affects admission chances.",
+            "Some schools conduct online screening.",
+            "Prepare well for Post-UTME exams."
+        ],
 
-        # ---------------- SYSTEM ----------------
-        "what is login": "Login is the process of accessing your student account.",
-        "what is register": "Register is creating a new account in the system.",
-        "what is dashboard": "Dashboard is the main page showing your student information.",
-        "what is admin": "Admin is the system controller who manages users and data.",
-        "what is session": "Session is temporary login data stored while using the system.",
+        "fees": [
+            "School fees depend on your course and level.",
+            "Check the portal for exact fee details.",
+            "Fees must be paid before exams.",
+            "Late payment may attract penalties.",
+            "Always confirm payments officially."
+        ],
 
-        # ---------------- EXTRA ACADEMIC ----------------
-        "what is syllabus": "A syllabus is the outline of topics covered in a course.",
-        "what is lecture": "A lecture is a formal teaching session in class.",
-        "what is assignment": "An assignment is a task given to students for assessment.",
-        "what is seminar": "A seminar is a group discussion or presentation session.",
-        "what is project work": "Project work is a practical academic task based on research.",
+        "acceptance": [
+            "Acceptance fee confirms your admission.",
+            "It must be paid after admission is offered.",
+            "Failure to pay may lead to losing admission.",
+            "It is usually non-refundable.",
+            "Pay it through official channels."
+        ],
 
-        # ---------------- FINAL ----------------
-        "default": "I'm here to help with CGPA, admission, fees, exams, results, and student life."
+        "exam": [
+            "Exams are held at the end of each semester.",
+            "You must register courses before exams.",
+            "Exam schedules are released early.",
+            "Missing exams can lead to failure.",
+            "Preparation is key to success."
+        ],
+
+        "carryover": [
+            "Carryover means retaking a failed course.",
+            "It happens when you fail a subject.",
+            "You must register it again.",
+            "It can delay graduation.",
+            "Avoid carryover by preparing well."
+        ],
+
+        "result": [
+            "Results are released on the student portal.",
+            "You can check using your login details.",
+            "Results reflect your academic performance.",
+            "Sometimes results may be delayed.",
+            "Ensure fees are paid to access results."
+        ],
+
+        "transcript": [
+            "Transcript shows your academic record.",
+            "It contains all your results.",
+            "It is used for further studies.",
+            "You can request it from your school.",
+            "It is an official academic document."
+        ],
+
+        "registration": [
+            "Course registration is done every semester.",
+            "You must select your courses carefully.",
+            "Late registration may attract penalties.",
+            "Approval may be required.",
+            "Registration is compulsory."
+        ],
+
+        "hostel": [
+            "Hostels provide accommodation for students.",
+            "Allocation depends on availability.",
+            "Apply early to secure a space.",
+            "Hostels are located on campus.",
+            "Payment is required for allocation."
+        ],
+
+        "siwes": [
+            "SIWES is industrial training for students.",
+            "It provides practical experience.",
+            "Students work in companies.",
+            "It is required for some courses.",
+            "You must submit a report."
+        ],
+
+        "clearance": [
+            "Clearance confirms no outstanding issues.",
+            "It is required before graduation.",
+            "You must complete all departments.",
+            "Incomplete clearance causes delays.",
+            "Always start early."
+        ],
+
+        "matriculation": [
+            "Matriculation is the official admission ceremony.",
+            "It welcomes new students.",
+            "Attendance is important.",
+            "It marks your entry into university.",
+            "Students take an oath during it."
+        ],
+
+        "graduation": [
+            "Graduation marks completion of studies.",
+            "Students receive certificates.",
+            "It is held annually.",
+            "Clearance is required before graduation.",
+            "It celebrates academic success."
+        ],
+
+        "lecture": [
+            "Lectures are teaching sessions.",
+            "They are conducted by lecturers.",
+            "Attendance is important.",
+            "Notes help in exams.",
+            "Lectures may be physical or online."
+        ],
+
+        "assignment": [
+            "Assignments are given for assessment.",
+            "They contribute to your grades.",
+            "Submit before deadlines.",
+            "They improve understanding.",
+            "They can be individual or group work."
+        ],
+
+        "project": [
+            "Projects are final year research work.",
+            "You will have a supervisor.",
+            "It involves detailed study.",
+            "Defense is required.",
+            "It tests your knowledge."
+        ],
+
+        "portal": [
+            "The portal is used for student activities.",
+            "You can check results there.",
+            "Login with your credentials.",
+            "Keep your details secure.",
+            "It is very important."
+        ],
+
+        "login": [
+            "Login gives access to your account.",
+            "Use your username and password.",
+            "Keep your login details safe.",
+            "Do not share your credentials.",
+            "It is required for portal access."
+        ],
+
+        "password": [
+            "Passwords protect your account.",
+            "Use strong passwords.",
+            "Do not share your password.",
+            "Change it regularly.",
+            "Keep it secure."
+        ],
+
+        "department": [
+            "Departments manage specific courses.",
+            "Each student belongs to a department.",
+            "Departments handle academic matters.",
+            "They set course requirements.",
+            "They guide students."
+        ],
+
+        "faculty": [
+            "A faculty is a group of related departments.",
+            "It oversees academic programs.",
+            "Each faculty has a dean.",
+            "Students belong to faculties.",
+            "It manages departments."
+        ],
+
+        "library": [
+            "Library provides academic resources.",
+            "Students can read and borrow books.",
+            "It supports research.",
+            "Quiet study is encouraged.",
+            "Digital resources are also available."
+        ],
+
+        "default": [
+            "I can help with admission, fees, CGPA, exams, and more.",
+            "Please ask a clear academic-related question.",
+            "Try asking about student activities or academics.",
+            "I'm here to assist you with school information.",
+            "Kindly rephrase your question for better understanding."
+        ]
     }
 
-    return faq.get(msg, faq["default"])
+    for key in data:
+        if key in msg:
+            return random.choice(data[key])
+
+    return random.choice(data["default"])
 
 # ---------------- REGISTER ----------------
 @app.route("/register", methods=["GET", "POST"])
