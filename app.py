@@ -59,246 +59,112 @@ import random
 def chatbot_response(msg):
     msg = msg.lower()
 
+    greetings = ["hello", "hi", "hey", "good morning", "good afternoon", "good evening"]
+    greet_reply = ["Hello! 👋", "Hi there! 😊", "Hey! 👋", "Welcome! 🎓", "Good to see you!"]
+
     data = {
 
-        "cgpa": [
-            "CGPA is the cumulative average of your grade points across all semesters.",
-            "It reflects your overall academic performance throughout your program.",
-            "CGPA is calculated by dividing total grade points by total credit units.",
-            "It helps measure long-term academic success.",
-            "A higher CGPA indicates better academic performance."
-        ],
+        "cgpa": ["CGPA is your overall academic average.", "It reflects total performance.", "It is calculated across semesters.", "It shows academic consistency.", "Higher CGPA means better results."],
 
-        "gpa": [
-            "GPA is your grade point average for a single semester.",
-            "It shows your academic performance within a semester.",
-            "Each semester has its own GPA.",
-            "GPA contributes to your overall CGPA.",
-            "It helps track short-term performance."
-        ],
+        "gpa": ["GPA is per semester performance.", "It measures one semester.", "It contributes to CGPA.", "It resets each semester.", "It tracks short-term performance."],
 
-        "credit": [
-            "Credit unit represents the weight of a course.",
-            "Courses have different credit units based on importance.",
-            "Higher credit courses affect your CGPA more.",
-            "Credits determine workload and grading weight.",
-            "Each course contributes differently based on its credit."
-        ],
+        "admission": ["Admission requires meeting requirements.", "You need JAMB score.", "Screening is required.", "Depends on course demand.", "Documents must be complete."],
 
-        "admission": [
-            "Admission requires meeting cut-off marks and passing screening.",
-            "You need a good JAMB score and proper documentation.",
-            "Admission depends on performance and course availability.",
-            "Screening results also affect admission chances.",
-            "Ensure all requirements are complete before applying."
-        ],
+        "cut off": ["Cut-off is minimum score.", "Each course differs.", "Higher is better.", "Changes yearly.", "Important for admission."],
 
-        "cut off": [
-            "Cut-off mark is the minimum score required for admission.",
-            "Each department sets its own cut-off mark.",
-            "Higher scores increase your chances.",
-            "Cut-off marks may vary yearly.",
-            "Always aim above the minimum requirement."
-        ],
+        "jamb": ["JAMB is entrance exam.", "Required for admission.", "Score determines eligibility.", "First step to university.", "Used for screening."],
 
-        "jamb": [
-            "JAMB is required for university admission in Nigeria.",
-            "Your JAMB score determines eligibility.",
-            "It is the first step to gaining admission.",
-            "You must meet the required score.",
-            "JAMB result is used for screening."
-        ],
+        "post utme": ["Post-UTME is screening.", "Comes after JAMB.", "Affects admission.", "Some schools skip it.", "Prepare well."],
 
-        "post utme": [
-            "Post-UTME is conducted after JAMB.",
-            "It helps schools screen candidates.",
-            "Performance affects admission chances.",
-            "Some schools conduct online screening.",
-            "Prepare well for Post-UTME exams."
-        ],
+        "fees": ["Fees vary by course.", "Check portal.", "Must be paid early.", "Late payment penalty.", "Confirm payment."],
 
-        "fees": [
-            "School fees depend on your course and level.",
-            "Check the portal for exact fee details.",
-            "Fees must be paid before exams.",
-            "Late payment may attract penalties.",
-            "Always confirm payments officially."
-        ],
+        "acceptance": ["Confirms admission.", "Paid after offer.", "Non-refundable.", "Very important.", "Secure your spot."],
 
-        "acceptance": [
-            "Acceptance fee confirms your admission.",
-            "It must be paid after admission is offered.",
-            "Failure to pay may lead to losing admission.",
-            "It is usually non-refundable.",
-            "Pay it through official channels."
-        ],
+        "exam": ["End of semester test.", "Must register courses.", "Schedule released early.", "Missing leads to fail.", "Prepare well."],
 
-        "exam": [
-            "Exams are held at the end of each semester.",
-            "You must register courses before exams.",
-            "Exam schedules are released early.",
-            "Missing exams can lead to failure.",
-            "Preparation is key to success."
-        ],
+        "carryover": ["Failed course repeat.", "Register again.", "Delays graduation.", "Avoid by studying.", "Common issue."],
 
-        "carryover": [
-            "Carryover means retaking a failed course.",
-            "It happens when you fail a subject.",
-            "You must register it again.",
-            "It can delay graduation.",
-            "Avoid carryover by preparing well."
-        ],
+        "result": ["Check via portal.", "Shows performance.", "May delay sometimes.", "Requires fee payment.", "Updated online."],
 
-        "result": [
-            "Results are released on the student portal.",
-            "You can check using your login details.",
-            "Results reflect your academic performance.",
-            "Sometimes results may be delayed.",
-            "Ensure fees are paid to access results."
-        ],
+        "transcript": ["Academic record.", "Used for jobs/studies.", "Official document.", "Request from school.", "Contains results."],
 
-        "transcript": [
-            "Transcript shows your academic record.",
-            "It contains all your results.",
-            "It is used for further studies.",
-            "You can request it from your school.",
-            "It is an official academic document."
-        ],
+        "registration": ["Done each semester.", "Select courses.", "Compulsory.", "Late penalty.", "Needs approval."],
 
-        "registration": [
-            "Course registration is done every semester.",
-            "You must select your courses carefully.",
-            "Late registration may attract penalties.",
-            "Approval may be required.",
-            "Registration is compulsory."
-        ],
+        "hostel": ["Student accommodation.", "Limited spaces.", "Apply early.", "On campus.", "Requires payment."],
 
-        "hostel": [
-            "Hostels provide accommodation for students.",
-            "Allocation depends on availability.",
-            "Apply early to secure a space.",
-            "Hostels are located on campus.",
-            "Payment is required for allocation."
-        ],
+        "siwes": ["Industrial training.", "Gives experience.", "Required in some courses.", "Attach to company.", "Submit report."],
 
-        "siwes": [
-            "SIWES is industrial training for students.",
-            "It provides practical experience.",
-            "Students work in companies.",
-            "It is required for some courses.",
-            "You must submit a report."
-        ],
+        "clearance": ["Confirms no issues.", "Required before graduation.", "Done across units.", "Avoid delay.", "Start early."],
 
-        "clearance": [
-            "Clearance confirms no outstanding issues.",
-            "It is required before graduation.",
-            "You must complete all departments.",
-            "Incomplete clearance causes delays.",
-            "Always start early."
-        ],
+        "matriculation": ["Admission ceremony.", "Welcomes students.", "Official entry.", "Take oath.", "Important event."],
 
-        "matriculation": [
-            "Matriculation is the official admission ceremony.",
-            "It welcomes new students.",
-            "Attendance is important.",
-            "It marks your entry into university.",
-            "Students take an oath during it."
-        ],
+        "graduation": ["End of program.", "Receive certificate.", "Requires clearance.", "Celebration event.", "Marks success."],
 
-        "graduation": [
-            "Graduation marks completion of studies.",
-            "Students receive certificates.",
-            "It is held annually.",
-            "Clearance is required before graduation.",
-            "It celebrates academic success."
-        ],
+        "lecture": ["Teaching session.", "By lecturers.", "Important to attend.", "Provides notes.", "May be online."],
 
-        "lecture": [
-            "Lectures are teaching sessions.",
-            "They are conducted by lecturers.",
-            "Attendance is important.",
-            "Notes help in exams.",
-            "Lectures may be physical or online."
-        ],
+        "assignment": ["Given tasks.", "Part of grading.", "Submit early.", "Improves learning.", "Can be group work."],
 
-        "assignment": [
-            "Assignments are given for assessment.",
-            "They contribute to your grades.",
-            "Submit before deadlines.",
-            "They improve understanding.",
-            "They can be individual or group work."
-        ],
+        "project": ["Final year work.", "Research-based.", "Supervisor assigned.", "Defense required.", "Tests knowledge."],
 
-        "project": [
-            "Projects are final year research work.",
-            "You will have a supervisor.",
-            "It involves detailed study.",
-            "Defense is required.",
-            "It tests your knowledge."
-        ],
+        "portal": ["Student system.", "Check results.", "Register courses.", "Secure login.", "Important tool."],
 
-        "portal": [
-            "The portal is used for student activities.",
-            "You can check results there.",
-            "Login with your credentials.",
-            "Keep your details secure.",
-            "It is very important."
-        ],
+        "login": ["Access account.", "Use credentials.", "Keep safe.", "Required always.", "Private access."],
 
-        "login": [
-            "Login gives access to your account.",
-            "Use your username and password.",
-            "Keep your login details safe.",
-            "Do not share your credentials.",
-            "It is required for portal access."
-        ],
+        "password": ["Protects account.", "Keep secret.", "Use strong one.", "Change regularly.", "Do not share."],
 
-        "password": [
-            "Passwords protect your account.",
-            "Use strong passwords.",
-            "Do not share your password.",
-            "Change it regularly.",
-            "Keep it secure."
-        ],
+        "department": ["Handles courses.", "Student belongs here.", "Manages academics.", "Guides students.", "Important unit."],
 
-        "department": [
-            "Departments manage specific courses.",
-            "Each student belongs to a department.",
-            "Departments handle academic matters.",
-            "They set course requirements.",
-            "They guide students."
-        ],
+        "faculty": ["Group of departments.", "Led by dean.", "Oversees programs.", "Academic structure.", "Manages departments."],
 
-        "faculty": [
-            "A faculty is a group of related departments.",
-            "It oversees academic programs.",
-            "Each faculty has a dean.",
-            "Students belong to faculties.",
-            "It manages departments."
-        ],
+        "library": ["Study center.", "Books available.", "Quiet space.", "Supports research.", "Digital access too."],
 
-        "library": [
-            "Library provides academic resources.",
-            "Students can read and borrow books.",
-            "It supports research.",
-            "Quiet study is encouraged.",
-            "Digital resources are also available."
-        ],
+        "semester": ["Academic period.", "Usually 2 per year.", "Contains courses.", "Ends with exams.", "Important timeline."],
 
-        "default": [
-            "I can help with admission, fees, CGPA, exams, and more.",
-            "Please ask a clear academic-related question.",
-            "Try asking about student activities or academics.",
-            "I'm here to assist you with school information.",
-            "Kindly rephrase your question for better understanding."
-        ]
+        "session": ["Academic year.", "Includes semesters.", "Starts admission.", "Ends with results.", "Full academic cycle."],
+
+        "defer": ["Postpone admission.", "Requires approval.", "Valid reason needed.", "Temporary delay.", "Resume later."],
+
+        "withdraw": ["Leave program.", "Can reapply later.", "Requires process.", "Formal exit.", "Important decision."],
+
+        "id card": ["Student identity.", "Used for access.", "Must carry it.", "Issued by school.", "Very important."],
+
+        "timetable": ["Schedule of lectures.", "Shows time/venue.", "Helps planning.", "Updated regularly.", "Check often."],
+
+        "venue": ["Place of lecture.", "Exam location.", "Specified in timetable.", "Important to know.", "Avoid confusion."],
+
+        "attendance": ["Presence in class.", "Important for grading.", "Required sometimes.", "Tracked by lecturers.", "Improves learning."],
+
+        "probation": ["Low performance warning.", "Improve CGPA.", "Risk of withdrawal.", "Temporary status.", "Needs attention."],
+
+        "expulsion": ["Permanent removal.", "Due to misconduct.", "Serious consequence.", "Strict rule.", "Avoid violations."],
+
+        "dress code": ["School dressing rule.", "Must follow guidelines.", "Applies to exams.", "Maintains discipline.", "Avoid sanctions."],
+
+        "deadline": ["Submission date.", "Must meet it.", "Late penalty.", "Important for tasks.", "Plan ahead."],
+
+        "group work": ["Team assignment.", "Collaboration needed.", "Shared tasks.", "Improves teamwork.", "Common in school."],
+
+        "presentation": ["Oral explanation.", "Part of grading.", "Prepare slides.", "Speak clearly.", "Confidence needed."],
+
+        "defense": ["Project presentation.", "Panel evaluation.", "Final assessment.", "Answer questions.", "Important stage."],
+
+        "internship": ["Work experience.", "Similar to SIWES.", "Build skills.", "Real-world exposure.", "Career growth."],
+
+        "certificate": ["Proof of study.", "Issued after graduation.", "Important document.", "Used for jobs.", "Official record."],
+
+        "alumni": ["Past students.", "Remain connected.", "Support network.", "Events organized.", "Career help."],
+
+        "default": ["I can help with academic questions.", "Ask about school topics.", "Try CGPA, admission, etc.", "I’m here to assist.", "Please rephrase."]
     }
+
+    is_greet = any(g in msg for g in greetings)
 
     for key in data:
         if key in msg:
-            return random.choice(data[key])
+            response = random.choice(data[key])
+            return f"{random.choice(greet_reply)} {response}" if is_greet else response
 
-    return random.choice(data["default"])
+    return f"{random.choice(greet_reply)} How can I assist you?" if is_greet else random.choice(data["default"])
 
 # ---------------- REGISTER ----------------
 @app.route("/register", methods=["GET", "POST"])
