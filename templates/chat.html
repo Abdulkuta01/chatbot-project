@@ -1,31 +1,193 @@
-<!-- ================= chat.html ================= -->
+<!DOCTYPE html>
 
-{% extends "base.html" %}
-{% block content %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chat</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* FULL SCREEN */
+body {
+height: 100vh;
+display: flex;
+}
+
+/* LEFT SIDEBAR (WhatsApp style) */
+.sidebar {
+width: 30%;
+background: #111b21;
+color: white;
+padding: 20px;
+}
+
+.sidebar h2 {
+margin-bottom: 20px;
+}
+
+/* CHAT AREA */
+.chat-container {
+width: 70%;
+display: flex;
+flex-direction: column;
+background: #efeae2;
+}
+
+/* HEADER */
+.chat-header {
+background: #202c33;
+color: white;
+padding: 15px;
+font-weight: bold;
+}
+
+/* MESSAGES */
+.chat-box {
+flex: 1;
+padding: 15px;
+overflow-y: auto;
+}
+
+/* MESSAGE STYLE */
+.message {
+margin: 10px 0;
+padding: 10px 15px;
+border-radius: 10px;
+max-width: 60%;
+}
+
+.user {
+background: #d9fdd3;
+margin-left: auto;
+}
+
+.bot {
+background: white;
+margin-right: auto;
+}
+
+/* INPUT AREA */
+.chat-input {
+display: flex;
+padding: 10px;
+background: #202c33;
+}
+
+.chat-input input {
+flex: 1;
+padding: 10px;
+border-radius: 20px;
+border: none;
+outline: none;
+}
+
+.chat-input button {
+margin-left: 10px;
+padding: 10px 20px;
+border: none;
+border-radius: 20px;
+background: #00a884;
+color: white;
+cursor: pointer;
+} 
+
+/* 📱 MOBILE RESPONSIVENESS */
+@media screen and (max-width: 768px) {
+
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        display: none; /* hide sidebar on phone */
+    }
+
+    .chat-container {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .chat-header {
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .chat-box {
+        padding: 10px;
+    }
+
+    .message {
+        max-width: 80%;
+        font-size: 14px;
+    }
+
+    .chat-input {
+        padding: 8px;
+    }
+
+    .chat-input input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .chat-input button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+.chat-box {
+    scroll-behavior: smooth;
+}
+
+</style>
+
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+    var chatBox = document.querySelector('.chat-box');
+    chatBox.scrollTop = chatBox.scrollHeight;
+</script>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+    <h2>Chats</h2>
+    <p>Student Support Bot</p>
+</div>
+
+<!-- CHAT AREA -->
 
 <div class="chat-container">
 
+```
+<div class="chat-header">
+    Student Assistant
+</div>
+
 <div class="chat-box">
     {% for sender, message, time in chats %}
-        {% if sender == "user" %}
-            <div class="user">
-                {{ message }}
-                <small>{{ time }}</small>
-            </div>
-        {% else %}
-            <div class="bot">
-                {{ message }}
-                <small>{{ time }}</small>
-            </div>
-        {% endif %}
+        <div class="message {{ sender }}">
+            {{ message }}
+        </div>
     {% endfor %}
 </div>
 
-<form method="post" class="input-box">
-    <input name="message" placeholder="Type a message..." required>
-    <button>Send</button>
+<form method="POST" class="chat-input">
+    <input type="text" name="message" placeholder="Type a message..." required>
+    <button type="submit">Send</button>
 </form>
+```
 
 </div>
 
-{% endblock %}
+</body>
+</html>
