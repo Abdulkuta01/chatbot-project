@@ -262,7 +262,7 @@ from flask_limiter.util import get_remote_address
 
 # Gemini AI
 import google.generativeai as genai
-
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 
 # ================= APP CONFIG =================
 app = Flask(__name__)
@@ -276,7 +276,7 @@ app.secret_key = os.environ.get("SECRET_KEY", "fallbacksecret")
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 
 # Load AI model
-model = genai.GenerativeModel("gemini-pro")
+model = genai.GenerativeModel("models/gemini-1.0-pro")
 
 
 # ================= SECURITY TOOLS =================
