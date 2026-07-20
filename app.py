@@ -263,32 +263,13 @@ from flask_limiter.util import get_remote_address
 # Gemini AI
 import google.generativeai as genai
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
-
+model = genai.GenerativeModel("gemini-1.5-flash")
 # ================= APP CONFIG =================
 app = Flask(__name__)
 
 # Secret key for sessions (important for security)
 app.secret_key = os.environ.get("SECRET_KEY", "fallbacksecret")
 
-
-# ================= GEMINI AI SETUP =================
-# Get API key from environment variable
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
-
-# Configure API key
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
-
-def chatbot_response(msg):
-    try:
-        # Use this exact model
-        model = genai.GenerativeModel(model_name="gemini-1.5-flash")
-
-        response = model.generate_content(msg)
-
-        return response.text if response.text else "No response from AI."
-
-    except Exception as e:
-        return f"Error: {str(e)}"
 
 
 # ================= SECURITY TOOLS =================
@@ -305,7 +286,7 @@ login_manager.login_view = "login"
 # ================= DATABASE SETUP =================
 def init_db():
 
-    #Create database tables if they dont exist
+    # Create database tables if they dont exist
     
     conn = sqlite3.connect("database.db")
     c = conn.cursor()
