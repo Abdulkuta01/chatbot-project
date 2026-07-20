@@ -234,6 +234,7 @@
 
 
 # ================= IMPORTS =================
+
 # Flask and web handling
 from flask import Flask, render_template, request, redirect, url_for, session
 
@@ -291,9 +292,9 @@ login_manager.login_view = "login"
 
 # ================= DATABASE SETUP =================
 def init_db():
-    """
-    Create database tables if they don't exist
-    """
+
+    #Create database tables if they dont exist
+    
     conn = sqlite3.connect("database.db")
     c = conn.cursor()
 
@@ -331,9 +332,9 @@ def load_user(user_id):
 
 # ================= INPUT SECURITY =================
 def is_safe_input(text):
-    """
-    Prevent basic SQL injection keywords
-    """
+    
+   # Prevent basic SQL injection keywords
+    
     return not re.search(r"(DROP|DELETE|INSERT|SELECT|UPDATE)", text, re.I)
 
 
@@ -342,9 +343,9 @@ def is_safe_input(text):
 chat_history = {}
 
 def chatbot_response(msg, user_id):
-    """
-    Generate AI response using Gemini
-    """
+    
+    #Generate AI response using Gemini
+    
     try:
         # Initialize user history if not exists
         if user_id not in chat_history:
@@ -368,8 +369,8 @@ def chatbot_response(msg, user_id):
         - Be concise
         - If unrelated, politely say you only handle school-related questions
         - Sound natural and friendly
-        """
-
+        
+"""
         # Add user message to history
         chat_history[user_id].append(f"User: {msg}")
 
@@ -393,9 +394,9 @@ def chatbot_response(msg, user_id):
 # ================= REGISTER ROUTE =================
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    """
-    Handle user registration
-    """
+    
+  #  Handle user registration
+    
     if request.method == "POST":
         username = request.form["username"]
 
@@ -420,9 +421,9 @@ def register():
 # ================= LOGIN ROUTE =================
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    """
-    Handle user login
-    """
+    
+   # Handle user login
+    
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -450,9 +451,9 @@ def login():
 @login_required
 @limiter.limit("10 per minute")  # Prevent spam
 def chat():
-    """
-    Main chatbot interface
-    """
+    
+   # Main chatbot interface
+    
     user_id = session.get("_user_id")
 
     conn = sqlite3.connect("database.db")
@@ -494,9 +495,9 @@ def chat():
 @app.route("/admin")
 @login_required
 def admin():
-    """
-    Admin dashboard showing statistics
-    """
+
+   # Admin dashboard showing statistics
+
     conn = sqlite3.connect("database.db")
     c = conn.cursor()
 
@@ -515,9 +516,9 @@ def admin():
 @app.route("/logout")
 @login_required
 def logout():
-    """
-    Logout user
-    """
+    
+   # Logout user
+    
     logout_user()
     return redirect(url_for("login"))
 
