@@ -343,42 +343,33 @@ chat_history = {}
 
 
 # ================= CHATBOT FUNCTION =================
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+
+# Create model once
+model = genai.GenerativeModel("gemini-1.5-flash")
+
+chat_history = {}
+
 def chatbot_response(msg, user_id):
     try:
-        # Initialize memory
         if user_id not in chat_history:
             chat_history[user_id] = []
 
-        # System instruction
-        system_prompt = """
-        You are a smart university chatbot.
+        prompt = "You are a helpful university chatbot.\n"
+        prompt += "\n".join(chat_history[user_id])
+        prompt += f"\nUser: {msg}\nBot:"
 
-        Only answer questions related to:
-        admission, fees, courses, exams, results, CGPA.
-
-        Be clear, short, and helpful.
-        """
-
-        # Save user message
-        chat_history[user_id].append(f"User: {msg}")
-
-        # Build prompt
-        prompt = system_prompt + "\n" + "\n".join(chat_history[user_id])
-
-        # Generate AI response
         response = model.generate_content(prompt)
 
-        # Get reply text
-        bot_reply = response.text if response.text else "No response."
+        reply = response.text if response.text else "No response."
 
-        # Save bot reply
-        chat_history[user_id].append(f"Bot: {bot_reply}")
+        chat_history[user_id].append(f"User: {msg}")
+        chat_history[user_id].append(f"Bot: {reply}")
 
-        return bot_reply
+        return reply
 
     except Exception as e:
         return f"Error: {str(e)}"
-
 
 # ================= REGISTER ROUTE =================
 @app.route("/register", methods=["GET", "POST"])
