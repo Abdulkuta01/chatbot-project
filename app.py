@@ -332,55 +332,35 @@ def is_safe_input(text):
 
 
 # ================= AI CHATBOT =================
-# Stores chat history per user
-chat_history = {}
-
 def chatbot_response(msg, user_id):
-    
-    #Generate AI response using Gemini
-    
     try:
-        # Initialize user history if not exists
         if user_id not in chat_history:
             chat_history[user_id] = []
 
-        # System instruction (controls AI behavior)
         system_prompt = """
         You are a smart university chatbot designed to assist students.
 
-        You ONLY answer questions related to:
-        - admission
-        - school fees
-        - courses
-        - exams
-        - results
-        - CGPA
-        - student life
+        Only answer school-related questions (admission, fees, exams, results, CGPA).
+        Be clear, short, and helpful.
+        """
 
-        Rules:
-        - Be clear and helpful
-        - Be concise
-        - If unrelated, politely say you only handle school-related questions
-        - Sound natural and friendly
-        
-"""
-        # Add user message to history
         chat_history[user_id].append(f"User: {msg}")
 
-        # Build full conversation prompt
-        prompt = system_prompt + "\n" + "\n".join(chat_history[user_id]) + "\nBot:"
+        # ✅ THIS IS THE FIX (use generate_text instead)
+        response = genai.generate_text(
+            model="models/text-bison-001",
+            prompt=system_prompt + "\n" + "\n".join(chat_history[user_id]),
+            temperature=0.7,
+            max_output_tokens=300
+        )
 
-        # Generate AI response
-        response = model.generate_content(prompt)
-        bot_reply = response.text
+        bot_reply = response.result
 
-        # Save AI reply
         chat_history[user_id].append(f"Bot: {bot_reply}")
 
         return bot_reply
 
     except Exception as e:
-        print("Gemini Error:", e)
         return f"Error: {str(e)}"
 
 
