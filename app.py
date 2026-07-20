@@ -388,7 +388,8 @@ def chatbot_response(msg, user_id):
 
     except Exception as e:
         print("Gemini Error:", e)
-        return "Sorry, I'm having trouble responding right now."
+        return f"Error: {str(e)}"
+
 
 
 # ================= REGISTER ROUTE =================
