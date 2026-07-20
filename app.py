@@ -332,38 +332,52 @@ def is_safe_input(text):
 
 
 # ================= AI CHATBOT =================
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+
+# Create model ONCE
+model = genai.GenerativeModel("gemini-1.5-flash")
+
+
+# ================= CHAT MEMORY =================
 chat_history = {}
+
+
+# ================= CHATBOT FUNCTION =================
 def chatbot_response(msg, user_id):
     try:
+        # Initialize memory
         if user_id not in chat_history:
             chat_history[user_id] = []
 
+        # System instruction
         system_prompt = """
-        You are a smart university chatbot designed to assist students.
+        You are a smart university chatbot.
 
-        Only answer school-related questions (admission, fees, exams, results, CGPA).
+        Only answer questions related to:
+        admission, fees, courses, exams, results, CGPA.
+
         Be clear, short, and helpful.
         """
 
+        # Save user message
         chat_history[user_id].append(f"User: {msg}")
 
-        # ✅ THIS IS THE FIX (use generate_text instead)
-        response = genai.generate_text(
-            model="models/text-bison-001",
-            prompt=system_prompt + "\n" + "\n".join(chat_history[user_id]),
-            temperature=0.7,
-            max_output_tokens=300
-        )
+        # Build prompt
+        prompt = system_prompt + "\n" + "\n".join(chat_history[user_id])
 
-        bot_reply = response.result
+        # Generate AI response
+        response = model.generate_content(prompt)
 
+        # Get reply text
+        bot_reply = response.text if response.text else "No response."
+
+        # Save bot reply
         chat_history[user_id].append(f"Bot: {bot_reply}")
 
         return bot_reply
 
     except Exception as e:
         return f"Error: {str(e)}"
-
 
 
 # ================= REGISTER ROUTE =================
