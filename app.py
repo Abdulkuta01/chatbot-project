@@ -332,6 +332,7 @@ def is_safe_input(text):
 
 
 # ================= AI CHATBOT =================
+chat_history = {}
 def chatbot_response(msg, user_id):
     try:
         if user_id not in chat_history:
