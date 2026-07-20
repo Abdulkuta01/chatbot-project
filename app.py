@@ -275,8 +275,20 @@ app.secret_key = os.environ.get("SECRET_KEY", "fallbacksecret")
 # Get API key from environment variable
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 
-# Load AI model
-model = genai.GenerativeModel("models/gemini-1.0-pro")
+# Configure API key
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+
+def chatbot_response(msg):
+    try:
+        # Use this exact model
+        model = genai.GenerativeModel(model_name="gemini-1.5-flash")
+
+        response = model.generate_content(msg)
+
+        return response.text if response.text else "No response from AI."
+
+    except Exception as e:
+        return f"Error: {str(e)}"
 
 
 # ================= SECURITY TOOLS =================
